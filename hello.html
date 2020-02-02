@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.76">
+  <style type="text/css">
+    p.p1 {
+      margin: 0.0px 0.0px 0.0px 0.0px;
+      font: 12.0px Helvetica
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="./button.css">
+  <script type="text/javascript" src="donut.js"></script>
+  <script>
+    // 获取连接状态
+    function isConnected() {
+      var isConnected = donut.isConnected();
+    }
+    // 获取应用信息
+    function getAppInfo() {
+      donut.getAppInfo().then(res => {
+        showElement(JSON.stringify(res));
+      });
+    }
+    // 获取当前钱包信息
+    function getCurrentWallet() {
+      donut.getCurrentWallet().then(res => {
+        showElement(JSON.stringify(res));
+      });
+    }
+
+    // 扫码
+    function invokeQRScanner() {
+      donut.invokeQRScanner().then(res => {
+        showElement(JSON.stringify(res));
+      });
+    }
+
+    // 获取设备信息
+    function getDeviceId() {
+      donut.getDeviceId().then(res => {
+        showElement(JSON.stringify(res));
+      });
+    }
+
+    var tx = {
+      "to": "jKBCwv4EcyvYtD4PafP17PLpnnZ16szQsC",
+      "currency": "swt",
+      "issuer": "",
+      "value": "0.001",
+      "memo": "子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约，其提供子链运行前和运行中的一些必要接口子链控制合约subchainbase是DAPP用户使用子链的基本合约，其提供子链运行前和运行中的一些必要接口子链控制合约subchainbase是DAPP用户使用子链的基本合约，其提供子链运行前和运行中的一些必要接口",
+      "gas": "0.0001"
+    }
+
+    // 转账
+    function transfer() {
+      donut.transfer(tx).then(res => {
+        showElement(JSON.stringify(res));
+      });
+    }
+
+
+    // 签名
+    function sign() {
+      donut.sign(tx).then(res => {
+        showElement(JSON.stringify(res));
+      });
+    }
+
+    // 获取所有钱包信息
+    function getWallets() {
+      donut.getWallets().then(res => {
+        showElement(JSON.stringify(res));
+      });
+    }
+
+    // 显示信息
+    function showElement(msg) {
+      var div = document.getElementById("msg_box");
+      div.value = "";
+      div.value = msg;                    //添加子节点ele
+    }
+
+  </script>
+</head>
+
+<body style="width: 100%;height: 100%;padding: 10px">
+  <div id="div_box"
+    style="width: 100%;min-height: 100%;position: absolute;background: #ffffff;margin-top: -50px;margin: 0px">
+    <button class="button" onclick="showElement('2332')">获取连接状态</button>
+    <button class="button" onclick="showElement('2332')">获取应用信息</button>
+    <button class="button" onclick="showElement('2332')">获取当前钱包信息</button>
+    <button class="button" onclick="showElement('2332')">扫码</button>
+    <button class="button" onclick="showElement('2332')">获取设备信息</button>
+    <button class="button" onclick="showElement('2332')">转账</button>
+    <button class="button" onclick="showElement('2332')">签名</button>
+    <button class="button" onclick="showElement('2332')">获取所有钱包信息</button>
+    <textarea id="msg_box" style="width: 100%" rows="3" readonly></textarea>
+  </div>
+</body>
+
+</html>
