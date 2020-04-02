@@ -81,6 +81,11 @@
       });
     }
 
+    // 全屏显示
+    function fullScreen(){
+      donut.fullScreen("1");
+    }
+
     // 获取设备信息
     function getDeviceId() {
       showReqElement("无");
@@ -148,6 +153,7 @@
     <button class="button" onclick="sign()">签名</button>
     <button class="button" onclick="getWallets()">获取所有钱包信息</button>
     <button class="button" onclick="shareToSNS()">分享</button>
+    <button class="button" onclick="fullScreen()">全屏显示</button>
     <h1>传递参数</h1>
     <textarea id="req_box" style="width: 100%;height:200px;font-size: 20px;" rows="10" readonly></textarea>
     <h1>返回结果</h1>
