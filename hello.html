@@ -19,39 +19,9 @@
     }
   </style>
   <link rel="stylesheet" type="text/css" href="./button.css">
-  <script type="text/javascript" src="donut.js"></script>
+  <script type="text/javascript" src="donut.min.js"></script>
   <script>
-    // 获取连接状态
-    function isConnected() {
-      var isConnected = donut.isConnected();
-    }
-    // 获取应用信息
-    function getAppInfo() {
-      donut.getAppInfo().then(res => {
-        showElement(JSON.stringify(res));
-      });
-    }
-    // 获取当前钱包信息
-    function getCurrentWallet() {
-      donut.getCurrentWallet().then(res => {
-        showElement(JSON.stringify(res));
-      });
-    }
-
-    // 扫码
-    function invokeQRScanner() {
-      donut.invokeQRScanner().then(res => {
-        showElement(JSON.stringify(res));
-      });
-    }
-
-    // 获取设备信息
-    function getDeviceId() {
-      donut.getDeviceId().then(res => {
-        showElement(JSON.stringify(res));
-      });
-    }
-
+    // 交易信息
     var tx = {
       "to": "jKBCwv4EcyvYtD4PafP17PLpnnZ16szQsC",
       "currency": "swt",
@@ -60,31 +30,103 @@
       "memo": "子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约子链控制合约subchainbase是DAPP用户使用子链的基本合约，其提供子链运行前和运行中的一些必要接口子链控制合约subchainbase是DAPP用户使用子链的基本合约，其提供子链运行前和运行中的一些必要接口子链控制合约subchainbase是DAPP用户使用子链的基本合约，其提供子链运行前和运行中的一些必要接口",
       "gas": "0.0001"
     }
+    // 分享信息
+    var shareInfo = {
+        "title": "js分享测试",
+        "url": "https://www.baidu.com/",
+        "text": "js分享测试",
+        "imgUrl": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574401209680&di=d14e80b8cab1506ec4d5e5e470abc75c&imgtype=0&src=http%3A%2F%2Fs08.lmbang.com%2FM00%2FDA%2FA3%2FDpgiA1vvGGCAakp2AACgZPF7RjQ970.jpg"
+    }
+    // 获取连接状态
+    function connectedStatus() {
+      showReqElement("无");
+      showMsgElement("");
+      var isConnected = donut.isConnected();
+      showMsgElement(JSON.stringify(isConnected));
+    }
+
+    // 获取应用信息
+    function getAppInfo() {
+      showReqElement("无");
+      showMsgElement("");
+      donut.getAppInfo().then(res => {
+        showMsgElement(JSON.stringify(res));
+      });
+    }
+
+    // 获取当前钱包信息
+    function getCurrentWallet() {
+      showReqElement("无");
+      showMsgElement("");
+      donut.getCurrentWallet().then(res => {
+        showMsgElement(JSON.stringify(res));
+      });
+    }
+
+    // 扫码
+    function invokeQRScanner() {
+      showReqElement("无");
+      showMsgElement("");
+      donut.invokeQRScanner().then(res => {
+        showMsgElement(JSON.stringify(res));
+      });
+    }
+
+    // 分享
+    function shareToSNS() {
+      showReqElement("分享信息：" + JSON.stringify(shareInfo));
+      showMsgElement("");
+      donut.shareToSNS(shareInfo).then(res => {
+        showMsgElement(JSON.stringify(res));
+      });
+    }
+
+    // 获取设备信息
+    function getDeviceId() {
+      showReqElement("无");
+      showMsgElement("");
+      donut.getDeviceId().then(res => {
+        showMsgElement(JSON.stringify(res));
+      });
+    }
 
     // 转账
     function transfer() {
+      showReqElement("转账信息：" + JSON.stringify(tx));
+      showMsgElement("");
       donut.transfer(tx).then(res => {
-        showElement(JSON.stringify(res));
+        showMsgElement(JSON.stringify(res));
       });
     }
 
 
     // 签名
     function sign() {
+      showReqElement("签名信息：" + JSON.stringify(tx));
+      showMsgElement("");
       donut.sign(tx).then(res => {
-        showElement(JSON.stringify(res));
+        showMsgElement(JSON.stringify(res));
       });
     }
 
     // 获取所有钱包信息
     function getWallets() {
+      showReqElement("无");
+      showMsgElement("");
       donut.getWallets().then(res => {
-        showElement(JSON.stringify(res));
+        showMsgElement(JSON.stringify(res));
       });
     }
 
-    // 显示信息
-    function showElement(msg) {
+    // 显示传递信息
+    function showReqElement(req) {
+      var div = document.getElementById("req_box");
+      div.value = "";
+      div.value = req;                    //添加子节点ele
+    }
+
+    // 显示返回信息
+    function showMsgElement(msg) {
       var div = document.getElementById("msg_box");
       div.value = "";
       div.value = msg;                    //添加子节点ele
@@ -96,15 +138,20 @@
 <body style="width: 100%;height: 100%;padding: 10px">
   <div id="div_box"
     style="width: 100%;min-height: 100%;position: absolute;background: #ffffff;margin-top: -50px;margin: 0px">
-    <button class="button" onclick="showElement('2332')">获取连接状态</button>
-    <button class="button" onclick="showElement('2332')">获取应用信息</button>
-    <button class="button" onclick="showElement('2332')">获取当前钱包信息</button>
-    <button class="button" onclick="showElement('2332')">扫码</button>
-    <button class="button" onclick="showElement('2332')">获取设备信息</button>
-    <button class="button" onclick="showElement('2332')">转账</button>
-    <button class="button" onclick="showElement('2332')">签名</button>
-    <button class="button" onclick="showElement('2332')">获取所有钱包信息</button>
-    <textarea id="msg_box" style="width: 100%" rows="3" readonly></textarea>
+    <h1>测试功能</h1>
+    <button class="button" onclick="connectedStatus()">获取连接状态</button>
+    <button class="button" onclick="getAppInfo()">获取应用信息</button>
+    <button class="button" onclick="getCurrentWallet()">获取当前钱包信息</button>
+    <button class="button" onclick="invokeQRScanner()">扫码</button>
+    <button class="button" onclick="getDeviceId()">获取设备信息</button>
+    <button class="button" onclick="transfer()">转账</button>
+    <button class="button" onclick="sign()">签名</button>
+    <button class="button" onclick="getWallets()">获取所有钱包信息</button>
+    <button class="button" onclick="shareToSNS()">分享</button>
+    <h1>传递参数</h1>
+    <textarea id="req_box" style="width: 100%;height:200px;font-size: 20px;" rows="10" readonly></textarea>
+    <h1>返回结果</h1>
+    <textarea id="msg_box" style="width: 100%;height:200px;font-size: 20px;" rows="10" readonly></textarea>
   </div>
 </body>
 
