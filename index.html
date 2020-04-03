@@ -37,6 +37,7 @@
         "text": "js分享测试",
         "imgUrl": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574401209680&di=d14e80b8cab1506ec4d5e5e470abc75c&imgtype=0&src=http%3A%2F%2Fs08.lmbang.com%2FM00%2FDA%2FA3%2FDpgiA1vvGGCAakp2AACgZPF7RjQ970.jpg"
     }
+    var isFull = true;
     // 获取连接状态
     function connectedStatus() {
       showReqElement("无");
@@ -83,7 +84,12 @@
 
     // 全屏显示
     function fullScreen(){
-      donut.fullScreen("1");
+      if(isFull){
+        donut.fullScreen(1);
+      }else {
+        donut.fullScreen(0);
+      }
+      isFull = !isFull;
     }
 
     // 获取设备信息
